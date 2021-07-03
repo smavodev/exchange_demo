@@ -1,18 +1,19 @@
 <template>
   <main id="app">
    <CompHeaders/>
-   <CompAssetsTable/>
+
+   <router-view class="container px-5 sm:px-20 py-20 flex justify-center"/>
   </main>
 </template>
 
 <script>
 import CompHeaders from "@/components/CompHeader.vue"; // . | @
-import CompAssetsTable from "@/components/CompAssetsTable.vue";
+
 
 export default {
   name: "App",
   components: {
-    CompHeaders, CompAssetsTable,
+    CompHeaders,
   },
 };
 </script>
