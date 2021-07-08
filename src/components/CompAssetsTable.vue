@@ -19,33 +19,61 @@
         v-for="(a, idx) in assets"
         :key="`asset-${idx}`"
       >
-        <img class="w-6 h-6"
+        <img
+          class="w-6 h-6"
           :src="`https://static.coincap.io/assets/icons/${a.symbol.toLowerCase()}@2x.png`"
           :alt="a.name"
           style="max-height: 65px"
         />
-        <td> <b> #{{ a.rank }} </b> </td>
-        <td>{{ a.name }}</td>
+        <td>
+          <b> #{{ a.rank }} </b>
+        </td>
+        <td>
+          <router-link
+            class="hover:underline text-green-500"
+            v-bind:to="{ name: 'coin-detail', params: { id: a.id } }"
+          >
+            {{ a.name }}
+          </router-link>
+          <small class="ml-l text-gray-600">{{ a.symbol }}</small>
+        </td>
         <td>{{ a.priceUsd | dollar }}</td>
         <td>{{ a.marketCapUsd | dollar }}</td>
-        <td v-bind:class="a.changePercent24Hr.includes('-') ? 'text-red-600' : 'text-green-600' ">
+        <td
+          v-bind:class="
+            a.changePercent24Hr.includes('-')
+              ? 'text-red-600'
+              : 'text-green-600'
+          "
+        >
           {{ a.changePercent24Hr | porcentaje }}
-          </td>
-        <td class="hidden sm:block"></td>
+        </td>
+        <td class="hidden sm:block">
+          <CompButton @custom-click="goToCoin(a.id)"> <span>Detalle</span> </CompButton>
+        </td>
       </tr>
     </tbody>
   </table>
 </template>
 
 <script>
+
+import CompButton from "@/components/CompButton";
+
 export default {
-  name: "PxAssetsTable",
+  name: "CompAssetsTable",
+  components: { CompButton },
   props: {
     assets: {
       type: Array,
       default: () => [],
     },
   },
+  methods: {
+    goToCoin (id){
+      this.$router.push({name: 'coin-detail', params : {id}})
+    }
+  }
 };
 </script>
 
