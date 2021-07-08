@@ -16,13 +16,23 @@
     <tbody>
       <tr
         class="border-b border-gray-200 hover:bg-gray-100 hover:bg-orange-100"
+        v-for="(asset, idx) in assets"
+        :key="`asset-${idx}`"
       >
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <img
+          :src="`https://static.coincap.io/assets/icons/${asset.symbol.toLowerCase()}@2x.png`"
+          :alt="asset.name"
+          style="max-height: 65px"
+        >
+        <td>
+          <b>
+            #{{ asset.rank }}
+          </b>
+        </td>
+        <td>{{ asset.name }}</td>
+        <td>{{ currencyFormater(asset.priceUsd) }}</td>
+        <td>{{ numberFormat(asset.marketCapUsd) }}</td>
+        <td>{{ numberFormat(asset.changePercent24Hr) }}</td>
         <td class="hidden sm:block"></td>
       </tr>
     </tbody>
@@ -31,12 +41,22 @@
 
 <script>
 export default {
-  name: "CompAssetsTable",
-
+  name: 'PxAssetsTable',
   props: {
     assets: {
       type: Array,
       default: () => [],
+    },
+  },
+  methods: {
+    currencyFormater(val) {
+      return Intl.NumberFormat('en-US', { currency: 'USD', style: 'currency' }).format(val);
+    },
+    numberFormat(val) {
+      if (val) {
+        return parseFloat(val).toLocaleString();
+      }
+      return val;
     },
   },
 };
@@ -44,11 +64,11 @@ export default {
 
 <style scoped>
 .up::before {
-  content: "👆";
+  content: '👆';
 }
 
 .down::before {
-  content: "👇";
+  content: '👇';
 }
 
 td {
