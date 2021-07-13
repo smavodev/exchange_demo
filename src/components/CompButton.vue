@@ -14,13 +14,23 @@
       rounded
     "
   >
-    <slot></slot>
+    <beat-loader :loading="isLoading" :color="'#68d391'" :size="8" />
+    <p v-show="!isLoading">
+      <slot></slot>
+    </p>
   </button>
 </template>
 
 <script>
 export default {
   name: "CompButton",
+
+  props: {
+    isLoading: {
+      type: Boolean,
+      default: false,
+    },
+  },
 
   methods: {
     buttonClick() {

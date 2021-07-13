@@ -25,8 +25,30 @@ function getAssetHistory(coin) {
     .then((res) => res.data);
 }
 
+const getMarkets = async (coin) => {
+  try {
+    let res = await fetch(`${url}/assets/${coin}/markets?limit=5`);
+    res = await res.json();
+    return res.data;
+  } catch (error) {
+    console.error("Error en el request");
+  }
+};
+
+const getExchange = async (id) => {
+  try {
+    let res = await fetch(`${url}/exchanges/${id}`);
+    res = await res.json();
+    return res.data;
+  } catch (error) {
+    console.error("Error en el request");
+  }
+};
+
 export default {
   getAssets,
   getAsset,
   getAssetHistory,
+  getMarkets,
+  getExchange,
 };
