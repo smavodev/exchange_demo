@@ -90,14 +90,23 @@
           <span class="text-xl"></span>
         </div>
       </div>
-
-      <line-chart
+      
+      <area-chart
+        class="my-10"
+        :colors="['skyblue']"
+        :min="min"
+        :max="max"
+        :data="history.map((h) => [h.date, parseFloat(h.priceUsd).toFixed(2)])"
+      />
+      <br>
+      <column-chart
         class="my-10"
         :colors="['green']"
         :min="min"
         :max="max"
         :data="history.map((h) => [h.date, parseFloat(h.priceUsd).toFixed(2)])"
       />
+
     </template>
   </div>
 </template>
