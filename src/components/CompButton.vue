@@ -1,6 +1,6 @@
 <template>
   <button
-    @click="buttonClick" 
+    @click="buttonClick"
     class="
       bg-transparent
       hover:bg-green-500

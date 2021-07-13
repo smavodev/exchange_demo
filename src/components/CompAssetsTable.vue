@@ -49,7 +49,9 @@
           {{ a.changePercent24Hr | porcentaje }}
         </td>
         <td class="hidden sm:block">
-          <CompButton @custom-click="goToCoin(a.id)"> <span>Detalle</span> </CompButton>
+          <CompButton @custom-click="goToCoin(a.id)">
+            <span>Detalle</span>
+          </CompButton>
         </td>
       </tr>
     </tbody>
@@ -57,7 +59,6 @@
 </template>
 
 <script>
-
 import CompButton from "@/components/CompButton";
 
 export default {
@@ -70,10 +71,10 @@ export default {
     },
   },
   methods: {
-    goToCoin (id){
-      this.$router.push({name: 'coin-detail', params : {id}})
-    }
-  }
+    goToCoin(id) {
+      this.$router.push({ name: "coin-detail", params: { id } });
+    },
+  },
 };
 </script>
 
